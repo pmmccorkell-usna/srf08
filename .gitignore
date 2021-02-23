@@ -125,3 +125,5 @@ dmypy.json
 .pyre/
 mbed ex code/srf08.cpp
 mbed ex code/srf08.h
+srf08_noclass.py
+srf08_class.py
