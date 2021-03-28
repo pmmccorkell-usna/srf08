@@ -6,14 +6,17 @@ class Sonar:
 	def __init__(self,BUS,debug=0):
 		self.DEBUGGING=debug
 		self.bus=BUS
-		self.process_timer=Timer(1)
-		self.repeat_timer=Timer(2)
+		self.repeat_timer = Timer(2)
 		self.distance = 0xffff
-		self.units='cm'
-		self.ADDRESS=112
+		self.units = b'\x51'	# cm default
+		self.ADDRESS = 112
 	
 	def start(self,unit='cm'):
-		self.units=unit
+		unit_type={
+			'in':b'\x50',
+			'cm':b'\x51'
+		}
+		self.units=unit_type[unit]
 		self.write_range()
 		sleep(0.07)
 		self.repeat_timer.init(mode=Timer.PERIODIC,freq=10,callback=self.get_range)
@@ -37,9 +40,5 @@ class Sonar:
 		return data[0]*0x100 + data[1]
 
 	def write_range(self):
-		unit_type={
-			'in':b'\x50',
-			'cm':b'\x51'
-		}
-		self.bus.writeto_mem(self.ADDRESS,0,unit_type[self.units])
+		self.bus.writeto_mem(self.ADDRESS,0,self.units)
 
