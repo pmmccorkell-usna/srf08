@@ -18,7 +18,7 @@ class Sonar:
 		}
 		self.units=unit_type[unit]
 		self.write_range()
-		sleep(0.07)
+		sleep(0.1)
 		self.repeat_timer.init(mode=Timer.PERIODIC,freq=10,callback=self.get_range)
 
 	def stop(self):
