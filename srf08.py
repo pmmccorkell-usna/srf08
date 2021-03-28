@@ -28,7 +28,7 @@ class Sonar:
 
 	def get_range(self,event=None):
 		self.distance=self.read_range()
-		sleep(0.0001)
+		#sleep(0.0001)
 		self.write_range()
 
 	def read_range(self):
